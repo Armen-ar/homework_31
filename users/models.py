@@ -61,7 +61,9 @@ class User(models.Model):
         default='member',
         max_length=12
     )
-    age = models.PositiveSmallIntegerField()
+    age = models.PositiveSmallIntegerField(
+        verbose_name="Возраст"
+    )
     location_id = models.ManyToManyField(Location)
 
     class Meta:
