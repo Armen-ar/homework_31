@@ -38,7 +38,7 @@ class AdListView(ListView):
                 'image': ad.image.url if ad.image else 'Без картинки',
             })
         return JsonResponse({
-            'ads': result,
+            'items': result,
             'page': page_object.number,
             'total': page_object.paginator.count},
             safe=False,

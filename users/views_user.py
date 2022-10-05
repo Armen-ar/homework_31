@@ -34,7 +34,7 @@ class UserListView(ListView):
                 'role': user.role
             })
         return JsonResponse({
-            'ads': result,
+            'items': result,
             'page': page_object.number,
             'total': page_object.paginator.count},
             safe=False,
