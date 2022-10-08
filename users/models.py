@@ -30,9 +30,9 @@ class UserRoles:
     ADMIN = 'admin'
     MODERATOR = 'moderator'
     choices = (
-        ('Пользователь', USER),
-        ('Админ', ADMIN),
-        ('Модератор', MODERATOR)
+        (USER, 'Пользователь'),
+        (ADMIN, 'Админ'),
+        (MODERATOR, 'Модератор')
     )
 
 
@@ -64,7 +64,7 @@ class User(models.Model):
     age = models.PositiveSmallIntegerField(
         verbose_name="Возраст"
     )
-    location_id = models.ManyToManyField(Location)
+    location = models.ManyToManyField(Location)
 
     class Meta:
         verbose_name = 'Пользователь'
