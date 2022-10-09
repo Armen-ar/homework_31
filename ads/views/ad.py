@@ -10,7 +10,7 @@ from django.views.generic import UpdateView, CreateView
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 from ads.models import Ad, Category
-from ads.serializers_ad import AdSerializer
+from ads.serializers.ad import AdSerializer
 from users.models import User
 
 

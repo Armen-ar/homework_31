@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 
-from ads.views_cat import root, CategoryViewSet
+from ads.views.cat import root, CategoryViewSet
 from avito import settings
 from users.views_user import LocationViewSet
 

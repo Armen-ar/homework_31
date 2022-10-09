@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from rest_framework import viewsets
 
 from ads.models import Category
-from ads.serializers_cat import CategorySerializer
+from ads.serializers.cat import CategorySerializer
 
 
 def root(request):
