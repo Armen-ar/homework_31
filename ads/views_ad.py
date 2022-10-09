@@ -6,17 +6,17 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import UpdateView, DetailView, CreateView
-from rest_framework.generics import ListAPIView
+from django.views.generic import UpdateView, CreateView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 from ads.models import Ad, Category
-from ads.serializers_ad import AdListSerializer
+from ads.serializers_ad import AdSerializer
 from users.models import User
 
 
 class AdListView(ListAPIView):
     queryset = Ad.objects.order_by('-price').all()
-    serializer_class = AdListSerializer
+    serializer_class = AdSerializer
 
     def get(self, request, *args, **kwargs):
         categories = request.GET.getlist('cat', [])
@@ -38,24 +38,9 @@ class AdListView(ListAPIView):
         return super().get(self, *args, **kwargs)
 
 
-class AdDetailView(DetailView):
-    model = Ad
-
-    def get(self, request, *args, **kwargs):
-        ad = self.get_object()
-        return JsonResponse({
-            'id': ad.id,
-            'name': ad.name,
-            'author': ad.author.username,
-            'category': ad.category.name if ad.category else 'Без категории',
-            'price': ad.price,
-            'description': ad.description,
-            'is_published': ad.is_published,
-            'image': ad.image.url if ad.image else 'Без картинки'
-        },
-            safe=False,
-            json_dumps_params={'ensure_ascii': False}
-        )
+class AdDetailView(RetrieveAPIView):
+    queryset = Ad.objects.all()
+    serializer_class = AdSerializer
 
 
 @method_decorator(csrf_exempt, name='dispatch')
