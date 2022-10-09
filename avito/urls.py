@@ -18,22 +18,25 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 
-from ads.views_cat import root
+from ads.views_cat import root, CategoryViewSet
 from avito import settings
 from users.views_user import LocationViewSet
 
 router_loc = SimpleRouter()
 router_loc.register('location', LocationViewSet)
 
+router_cat = SimpleRouter()
+router_cat.register('category', CategoryViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', root),
-    path('cat/', include('ads.urls.cat_urls')),
     path('ad/', include('ads.urls.ad_urls')),
     path('user/', include('users.urls'))
 ]
 
 urlpatterns += router_loc.urls
+urlpatterns += router_cat.urls
 
 if settings.DEBUG:
     urlpatterns += static(
