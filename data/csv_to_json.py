@@ -29,13 +29,15 @@ def convert_file(csv_file, json_file, model_name):
                 row['price'] = int(row['price'])
             if 'age' in row:
                 row['age'] = int(row['age'])
+            if 'location' in row:
+                row['location'] = [int(row['location'])]
             to_add['fields'] = row
             result.append(to_add)
     with open(json_file, 'w', encoding='utf8') as json_f:
         json_f.write(json.dumps(result, ensure_ascii=False))
 
 
-convert_file(DATA_CATEGORIES, JSON_CATEGORIES, 'ads.category')
-convert_file(DATA_ADS, JSON_ADS, 'ads.ad')
-convert_file(DATA_LOC, JSON_LOC, 'users.location')
+# convert_file(DATA_CATEGORIES, JSON_CATEGORIES, 'ads.category')
+# convert_file(DATA_ADS, JSON_ADS, 'ads.ad')
+# convert_file(DATA_LOC, JSON_LOC, 'users.location')
 convert_file(DATA_USER, JSON_USER, 'users.user')
