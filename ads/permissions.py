@@ -3,7 +3,7 @@ from rest_framework import permissions
 from users.models import UserRoles
 
 
-class IsOwnerSelection(permissions):
+class IsOwnerOrStuff(permissions.BasePermission):
     message = "У Вас нет права на редактирование подборки"
 
     def has_object_permission(self, request, view, obj):
@@ -12,7 +12,7 @@ class IsOwnerSelection(permissions):
         return False
 
 
-class IsOwnerAdOrStaff(permissions):
+class IsOwnerAdOrStaff(permissions.BasePermission):
     message = "У Вас нет права на редактирование подборки"
 
     def has_object_permission(self, request, view, obj):
