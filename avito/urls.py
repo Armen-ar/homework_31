@@ -21,7 +21,7 @@ from rest_framework.routers import SimpleRouter
 from ads.views.ad import AdViewSet
 from ads.views.cat import root, CategoryViewSet
 from avito import settings
-from users.views_user import LocationViewSet
+from users.views import LocationViewSet
 
 router = SimpleRouter()
 router.register('location', LocationViewSet)
