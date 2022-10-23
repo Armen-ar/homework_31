@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from users.models import Location, User
+from users.validators import email_validator
 
 
 class LocationSerializer(serializers.ModelSerializer):
@@ -10,11 +11,7 @@ class LocationSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    Location = serializers.SlugRelatedField(
-        read_only=True,
-        many=True,
-        slug_field='name',
-    )
+    Location = serializers.SlugRelatedField(read_only=True, many=True, slug_field='name')
 
     class Meta:
         model = User
@@ -22,12 +19,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
-    Location = serializers.SlugRelatedField(
-        required=False,
-        queryset=Location.objects.all(),
-        many=True,
-        slug_field='name',
-    )
+    Location = serializers.SlugRelatedField(required=False, queryset=Location.objects.all(),
+                                            many=True, slug_field='name')
+    email = serializers.EmailField(validators=[email_validator])
 
     def is_valid(self, *, raise_exception=False):
         self._location = self.initial_data.pop('location', [])
@@ -48,12 +42,8 @@ class UserCreateSerializer(serializers.ModelSerializer):
 
 
 class UserUpdateSerializer(serializers.ModelSerializer):
-    Location = serializers.SlugRelatedField(
-        required=False,
-        queryset=Location.objects.all(),
-        many=True,
-        slug_field='name',
-    )
+    Location = serializers.SlugRelatedField(required=False, queryset=Location.objects.all(),
+                                            many=True, slug_field='name')
 
     def is_valid(self, *, raise_exception=False):
         self._location = self.initial_data.pop('location')
