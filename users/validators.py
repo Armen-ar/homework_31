@@ -4,7 +4,7 @@ from rest_framework import serializers
 
 from django.core.exceptions import ValidationError
 
-USER_MIN_AGE = 9
+from avito.settings import USER_MIN_AGE
 
 
 def birth_date_validator(value):
